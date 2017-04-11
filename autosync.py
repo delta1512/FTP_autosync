@@ -71,3 +71,12 @@ with FTP('''hostname of ftp server''') as ftp:
         os.utime(f,(t, t))
     for f in get:
         ftp.retrbinary('RETR ' + f, open(f, 'wb').write)
+        for x in serv_files:
+            if f == x[0]:
+                tmp = x
+        at = int(os.popen('date +%s').read())
+        mt = datetime.datetime(year=int(os.popen('date +%Y').read()),
+            month=months.index(tmp[1])+1, day=int(tmp[2]), hour=int(tmp[3][:-3]),
+            minute=int(tmp[3][3:]))
+        mt = mktime(mt.timetuple())
+        os.utime(f, (at, mt))
