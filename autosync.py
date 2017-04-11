@@ -1,4 +1,5 @@
 from ftplib import FTP
+from time import mktime
 import os
 import glob
 import datetime
